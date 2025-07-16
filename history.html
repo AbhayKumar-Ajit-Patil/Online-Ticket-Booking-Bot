@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Request History</title>
+</head>
+<body>
+    <h2>Ticket Request History</h2>
+
+    {% if requests %}
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Timestamp</th>
+            <th>Email</th>
+            <th>Fixture URL</th>
+            <th>Blocks</th>
+            <th>Prices</th>
+            <th>Quantity</th>
+            <th>Headless</th>
+        </tr>
+        {% for r in requests %}
+        <tr>
+            <td>{{ r.timestamp }}</td>
+            <td>{{ r.email }}</td>
+            <td>{{ r.fixture_url }}</td>
+            <td>{{ r.blocks }}</td>
+            <td>{{ r.prices }}</td>
+            <td>{{ r.quantity }}</td>
+            <td>{{ 'Yes' if r.headless else 'No' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No records found.</p>
+    {% endif %}
+
+    <br>
+    <a href="/">← Back to Form</a>
+</body>
+</html>

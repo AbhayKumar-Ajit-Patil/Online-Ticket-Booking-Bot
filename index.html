@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Ticket Bot</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-red-800 to-black min-h-screen text-white flex items-center justify-center p-6">
+
+  <div class="w-full max-w-lg bg-white bg-opacity-10 backdrop-blur-md rounded-2xl shadow-2xl p-8">
+    <h1 class="text-3xl font-bold text-center text-yellow-400 mb-6">🎟️ Online Ticket Bot</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="mb-4">
+          {% for category, message in messages %}
+            <li class="p-3 mb-2 rounded {{ 'bg-blue-600' if category == 'info' else 'bg-red-600' if category == 'danger' else 'bg-green-600' }}">
+              {{ message }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="space-y-4">
+      <input type="email" name="email" placeholder="Email" required class="w-full p-3 rounded bg-white bg-opacity-20 focus:bg-opacity-30 outline-none"/>
+      <input type="password" name="password" placeholder="Password" required class="w-full p-3 rounded bg-white bg-opacity-20 focus:bg-opacity-30 outline-none"/>
+      <input type="text" name="fixture_url" placeholder="Fixture URL" required class="w-full p-3 rounded bg-white bg-opacity-20 focus:bg-opacity-30 outline-none"/>
+      <input type="text" name="blocks" placeholder="Preferred Blocks (comma separated)" class="w-full p-3 rounded bg-white bg-opacity-20 focus:bg-opacity-30 outline-none"/>
+      <input type="text" name="prices" placeholder="Price Categories (comma separated)" class="w-full p-3 rounded bg-white bg-opacity-20 focus:bg-opacity-30 outline-none"/>
+      <input type="number" name="quantity" placeholder="Ticket Quantity" min="1" value="1" class="w-full p-3 rounded bg-white bg-opacity-20 focus:bg-opacity-30 outline-none"/>
+      
+      <label class="inline-flex items-center mt-2">
+        <input type="checkbox" name="headless" class="form-checkbox text-yellow-500" />
+        <span class="ml-2 text-sm">Filled all Fields</span>
+      </label>
+
+      <button type="submit" class="w-full py-3 mt-4 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded transition duration-300">
+        🚀 Start Booking
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
